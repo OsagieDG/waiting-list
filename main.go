@@ -64,3 +64,4 @@ func subscribe(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Name: %s, Email: %s\n", name, email)
 	w.Write([]byte("<h2>Subscription successful!</h2>"))
 }
+

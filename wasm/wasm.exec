@@ -1,0 +1,4 @@
+GOOS=js GOARCH=wasm go build -o ../ui/static/main.wasm main_wasm.go  
+
+
+cp $(go env GOROOT)/misc/wasm/wasm_exec.js path/to/your/project/static/

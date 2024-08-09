@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700;800;900&display=swap">
   <link rel="stylesheet" href="static/styles.css">
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="static/wasm_exec.js"></script>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="">
   <div>
@@ -15,14 +17,30 @@
       <h1>Join our waiting list</h1>
       <p>Be the first to know what we are up to.</p>
       <form class="join-wrapper" hx-post="/subscribe">
-         <input type="text" id="name" name="name" placeholder="Enter your name">
-         <input type="email" id="email" name="email" placeholder="Enter your email">
-         <button type="submit">Join Now!</button>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <button type="submit">Join Now!</button>
       </form>
-       <div class="result" hx-post="/subscribe"></div>
+      <div class="result"></div>
+
+      <script>
+        window.onload = function() {
+          const go = new Go();
+          WebAssembly.instantiateStreaming(fetch("static/main.wasm"), go.importObject).then((result) => {
+              go.run(result.instance);
+          });
+
+          // Example usage of the Wasm function
+          document.querySelector("form").addEventListener("submit", function(event) {
+              event.preventDefault();
+              wasmFunction(
+                document.getElementById("name").value,
+                document.getElementById("email").value
+              );
+          });
+        };
+      </script>
     </div>
   </div>
 </body>
 </html>
-
-
