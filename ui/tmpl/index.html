@@ -30,10 +30,9 @@
               go.run(result.instance);
           });
 
-          // Example usage of the Wasm function
           document.querySelector("form").addEventListener("submit", function(event) {
               event.preventDefault();
-              wasmFunction(
+              inputValidation(
                 document.getElementById("name").value,
                 document.getElementById("email").value
               );
