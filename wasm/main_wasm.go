@@ -6,14 +6,14 @@ import (
 )
 
 func main() {
-	// Bind a Go function to JavaScript
-	js.Global().Set("wasmFunction", js.FuncOf(wasmFunction))
+	// Binds a Go function to JavaScript
+	js.Global().Set("inputValidation", js.FuncOf(inputValidation))
 
-	// Keep the program running
+	// Keeps the program running
 	select {}
 }
 
-func wasmFunction(this js.Value, args []js.Value) interface{} {
+func inputValidation(this js.Value, args []js.Value) interface{} {
 	name := args[0].String()
 	email := args[1].String()
 
@@ -25,4 +25,3 @@ func wasmFunction(this js.Value, args []js.Value) interface{} {
 	js.Global().Get("console").Call("log", "Name:", name, "Email:", email)
 	return nil
 }
-
